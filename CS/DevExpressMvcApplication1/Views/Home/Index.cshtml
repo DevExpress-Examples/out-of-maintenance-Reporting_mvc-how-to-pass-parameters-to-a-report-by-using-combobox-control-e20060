@@ -1,0 +1,44 @@
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+<p>
+    To learn more about DevExpress Extensions for ASP.NET MVC visit <a href="http://devexpress.com/Products/NET/Controls/ASP-NET-MVC/" title="ASP.NET MVC Website">http://devexpress.com/Products/NET/Controls/ASP-NET-MVC/</a>.
+</p>
+
+<table>
+    <tr>
+        <td>
+            @Html.DevExpress().ComboBox(settings => {
+           settings.Name = "comboBox1";
+           settings.Width = 300;
+           settings.Properties.TextField = "CategoryName";
+           settings.Properties.ValueField = "CategoryID";
+           settings.Properties.ValueType = typeof(int);
+           settings.Properties.DropDownStyle = DropDownStyle.DropDownList;
+
+       }).BindList(ViewData["Categories"]).GetHtml()
+        </td>
+
+        <td>
+            @Html.DevExpress().Button(settings => {
+           settings.Name = "buton1";
+           settings.ClientSideEvents.Click = "OnButtonClick";
+           settings.Width = 100;
+           settings.Text = "Submit";
+       }).GetHtml()
+        </td>
+    </tr>
+</table>
+
+@Html.DevExpress().ReportToolbar(settings => {
+    settings.Name = "ReportToolbar";
+    settings.ReportViewerName = "reportViewer1";
+}).GetHtml()
+
+@Html.Partial("CallbackPanelPartial")
+
+
+
+
